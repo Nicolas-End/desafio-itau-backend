@@ -43,6 +43,8 @@ public class TransactionService {
 
     public ResponseEntity getAllStatics(){
 
+        StatisticsDTO statics = null;
+
         // pega a penas as transações com menos de 60 segundos = 1 minuto
         List<TransactionDTO> lastTransacoes = transacaoDatas.stream()
                 .filter(datas ->
@@ -50,8 +52,11 @@ public class TransactionService {
                 )
                 .toList();
 
+        if (lastTransacoes.isEmpty() ) return ResponseEntity.ok(statics);
 
-        return ResponseEntity.ok(createStaticsDTO(lastTransacoes));
+        statics = createStaticsDTO(lastTransacoes); 
+
+        return ResponseEntity.ok(statics);
 
     }
 
