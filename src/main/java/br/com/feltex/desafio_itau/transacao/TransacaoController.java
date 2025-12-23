@@ -11,18 +11,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/transacao")
 public class TransacaoController {
-    List<TransacaoDTO> transacaoDatas = new ArrayList<>();
+
+    private final TransacaoService transacaoService;
+    public TransacaoController(TransacaoService transacaoService){
+        this.transacaoService = transacaoService;
+    }
+
 
     @PostMapping
     public ResponseEntity RegisterNewTransacao(@RequestBody TransacaoDTO datas) {
 
-        this.transacaoDatas.add(datas);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return transacaoService.AddNewTransacao(datas);
     }
 
     @GetMapping
     public  ResponseEntity returnAllTransacoes(){
-        return ResponseEntity.ok(this.transacaoDatas);
+        return this.transacaoService.getAllTransacoes();
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteAllTransacoes(){
+        return this.transacaoService.deleteTransacoes();
     }
 }
