@@ -54,7 +54,7 @@ public class TransactionService {
 
         if (lastTransacoes.isEmpty() ) return ResponseEntity.ok(statics);
 
-        statics = createStaticsDTO(lastTransacoes); 
+        statics = createStaticsDTO(lastTransacoes);
 
         return ResponseEntity.ok(statics);
 
