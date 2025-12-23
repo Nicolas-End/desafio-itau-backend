@@ -1,4 +1,4 @@
-package br.com.feltex.desafioitau;
+package br.com.feltex.desafio_itau;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package br.com.feltex.desafioitau;
+package br.com.feltex.desafio_itau;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
