@@ -1,5 +1,6 @@
 package br.com.feltex.desafio_itau.transacao;
 
+import br.com.feltex.desafio_itau.estatisticas.StatisticsDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -8,8 +9,9 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
+import java.util.Optional;
+import java.util.OptionalDouble;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class TransacaoService {
@@ -42,7 +44,7 @@ public class TransacaoService {
 
         OffsetDateTime dateNow = OffsetDateTime.now();
 
-
+        // pega a penas as transações com menos de 60 segundos = 1 minuto
         List<TransacaoDTO> lastTransacoes = transacaoDatas.stream()
                 .filter(datas ->
                         Duration.between(datas.dateHour(), OffsetDateTime.now()).toSeconds() <= 60
@@ -51,5 +53,27 @@ public class TransacaoService {
 
 
 
+        return ResponseEntity.ok(createStaticsDTO(lastTransacoes));
+
+    }
+
+    private StatisticsDTO createStaticsDTO(List<TransacaoDTO> lastTransacoes){
+        double sum = lastTransacoes.stream()
+                .mapToDouble(TransacaoDTO::value)
+                .sum();
+
+        double avg = lastTransacoes.stream()
+                .mapToDouble(TransacaoDTO::value)
+                .average().getAsDouble();
+
+        OptionalDouble min = lastTransacoes.stream()
+                .mapToDouble(TransacaoDTO::value)
+                .min();
+
+        OptionalDouble max = lastTransacoes.stream()
+                .mapToDouble(TransacaoDTO::value)
+                .max();
+
+        return new StatisticsDTO(lastTransacoes.size(),sum,avg,min,max);
     }
 }

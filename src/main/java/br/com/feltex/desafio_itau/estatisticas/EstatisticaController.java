@@ -19,6 +19,6 @@ public class EstatisticaController {
 
     @GetMapping
     public ResponseEntity getStatistics(){
-
+        return  this.transacaoService.getAllStatics();
     }
 }
