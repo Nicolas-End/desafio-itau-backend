@@ -4,9 +4,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class TransacaoService {
@@ -33,5 +36,20 @@ public class TransacaoService {
         transacaoDatas.clear();
 
         return ResponseEntity.ok().build();
+    }
+
+    public ResponseEntity getAllStatics(){
+
+        OffsetDateTime dateNow = OffsetDateTime.now();
+
+
+        List<TransacaoDTO> lastTransacoes = transacaoDatas.stream()
+                .filter(datas ->
+                        Duration.between(datas.dateHour(), OffsetDateTime.now()).toSeconds() <= 60
+                )
+                .toList();
+
+
+
     }
 }
