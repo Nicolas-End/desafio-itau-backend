@@ -16,7 +16,7 @@ import java.util.OptionalDouble;
 public class TransactionService {
 
     // "base de dados" para salvar transações
-    private List<TransactionDTO> transacaoDatas = new ArrayList<>();
+    private static List<TransactionDTO> transacaoDatas = new ArrayList<>();
 
 
     public ResponseEntity AddNewTransaction(TransactionDTO datas){
