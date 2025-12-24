@@ -1,0 +1,6 @@
+br\com\feltex\desafio_itau\services\TransactionService.class
+br\com\feltex\desafio_itau\DesafioItauApplication.class
+br\com\feltex\desafio_itau\dtos\TransactionDTO.class
+br\com\feltex\desafio_itau\Controllers\StatisticsController.class
+br\com\feltex\desafio_itau\dtos\StatisticsDTO.class
+br\com\feltex\desafio_itau\Controllers\TransactionController.class
