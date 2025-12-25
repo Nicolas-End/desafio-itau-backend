@@ -16,13 +16,13 @@ import java.util.OptionalDouble;
 public class TransactionService {
 
     // "base de dados" para salvar transações
+    // static para garantir que haverá uma única lista 
     private static List<TransactionDTO> transacaoDatas = new ArrayList<>();
 
 
     public ResponseEntity AddNewTransaction(TransactionDTO datas){
 
-        // guarda a data de hoje e faz a verificação
-        OffsetDateTime dateNow  = OffsetDateTime.now();
+        // guarda a data de hoje e faz a verificação se a data da transação é válida        OffsetDateTime dateNow  = OffsetDateTime.now();
         if (dateNow.isBefore(datas.dateHour())) return  ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).build();
 
         transacaoDatas.add(datas);
